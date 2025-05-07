@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Portfolio Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+        
+        .pdf-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        
+        #pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .loading-message {
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-message" id="loadingMessage">
+        Loading PDF... Please wait.
+    </div>
+    
+    <div class="pdf-container">
+        <!-- Replace with your PDF URL -->
+        <iframe id="pdf-viewer" src="https://your-pdf-url.pdf"></iframe>
+    </div>
+    
+    <script>
+        // Get references to elements
+        const pdfViewer = document.getElementById('pdf-viewer');
+        const loadingMessage = document.getElementById('loadingMessage');
+        
+        // Your PDF URL - replace this with your GitHub or other URL
+        const pdfUrl = "https://raw.githubusercontent.com/ahmedx7w/ahmedx7w.github.io/main/bnbn.pdf";
+        
+        // Update the iframe source
+        pdfViewer.src = pdfUrl;
+        
+        // Hide loading message once PDF is loaded
+        pdfViewer.onload = function() {
+            loadingMessage.style.display = "none";
+        };
+        
+        // Show error message if PDF fails to load
+        pdfViewer.onerror = function() {
+            loadingMessage.textContent = "Failed to load PDF. Please check the URL and try again.";
+        };
+    </script>
+</body>
+</html>
