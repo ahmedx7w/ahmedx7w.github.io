@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Mohamed - UI/UX Designer</title>
+    <style>
+        :root {
+            --text-primary: #33302E;
+            --text-secondary: #505050;
+            --bg-primary: #FFF1E5;
+            --bg-secondary: #F2DFCE;
+            --accent: #0D7680;
+            --border: #CCC1B7;
+            --transition: all 0.3s ease;
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--accent);
+        }
+        
+        /* Header styles */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+      
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+        }
+        
+        /* Hero section */
+        .hero {
+            padding: 6rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+       
+        
+        
+        }
+        
+        .hero-title {
+            font-size: 2.75rem;
+            line-height: 1.3;
+            max-width: 900px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background-color: #0D7680;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            width: max-content;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #0A5C64;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: #0D7680;
+            border: 1px solid #0D7680;
+        }
+        
+        .btn-outline:hover {
+            background-color: #0D7680;
+            color: white;
+        }
+        
+        /* Section styles */
+        section {
+            padding: 5rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Contact section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            width: 1.5rem;
+            text-align: center;
+        }
+        
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+        }
+        
+        .form-control {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.25rem;
+            font-family: inherit;
+            font-size: inherit;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <div class="logo-circle">AM</div>
+                Ahmed Mohamed
+            </a>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="https://www.behance.net/ahmedx7w" target="_blank">Behance</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="hero container">
+        <div class="profile-image">
+            AM
+        </div>
+        <h1 class="hero-title">Graphic and Web Designer driven by curiosity, intuition, and just the right amount of overthinking.</h1>
+        <p class="hero-subtitle">Creating user-centric digital experiences with attention to cultural sensitivity and accessibility.</p>
+        <div class="hero-buttons">
+            <a href="https://raw.githubusercontent.com/ahmedx7w/ahmedx7w.github.io/main/bnbn.pdf" target="_blank" class="btn">My Works</a>
+            
+            <a href="https://raw.githubusercontent.com/ahmedx7w/ahmedx7w.github.io/main/bnbn.pdf" class="btn">My Works</a>
+        </div>
+    </div>
+    
+    <section id="about" class="container">
+        <h2 class="section-title">About</h2>
+        <p>Aspiring Graphic and UI/UX Designer, gaining experience in creating user-centric digital experiences. Developing skills in translating requirements into intuitive interfaces with attention to cultural sensitivity and accessibility. Contributing to website design projects, digital storytelling initiatives, and learning through cross-functional collaboration. Eager to grow and apply design thinking principles in professional settings.</p>
+        <p>Based in Abu Dhabi, UAE.</p>
+    </section>
+    
+    <section id="contact" class="container">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-grid">
+            <div class="contact-links">
+                <a href="tel:+971558823276" class="contact-link">
+                    <span class="contact-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                        </svg>
+                    </span>
+                    (+971) 558823276
+                </a>
+                <a href="mailto:ahmedx7w@gmail.com" class="contact-link">
+                    <span class="contact-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                        </svg>
+                    </span>
+                    ahmedx7w@gmail.com
+                </a>
+                <a href="https://www.behance.net/ahmedx7w" target="_blank" class="contact-link">
+                    <span class="contact-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4.654 3c.461 0 .887.035 1.278.14.39.07.711.216.996.391.286.176.497.426.641.747.14.32.216.711.216 1.137 0 .496-.106.922-.356 1.242-.215.32-.566.606-.997.817.606.176 1.067.496 1.348.922.281.426.461.957.461 1.563 0 .496-.105.922-.285 1.278a2.317 2.317 0 0 1-.782.887c-.32.215-.711.39-1.137.496a5.329 5.329 0 0 1-1.278.176L0 12.803V3h4.654zm-.285 3.978c.39 0 .71-.105.957-.285.246-.18.355-.497.355-.887 0-.216-.035-.426-.105-.567a.981.981 0 0 0-.32-.355 1.84 1.84 0 0 0-.461-.176c-.176-.035-.356-.035-.567-.035H2.17v2.31c0-.005 2.2-.005 2.2-.005zm.105 4.193c.215 0 .426-.035.606-.07.176-.035.356-.106.496-.216s.25-.215.356-.39c.07-.176.14-.391.14-.641 0-.496-.14-.852-.426-1.102-.285-.215-.676-.32-1.137-.32H2.17v2.734h2.305v.005zm6.858-.035c.286.285.711.426 1.278.426.39 0 .746-.106 1.032-.286.285-.215.46-.426.53-.64h1.74c-.286.851-.712 1.457-1.278 1.848-.566.355-1.243.566-2.06.566a4.135 4.135 0 0 1-1.527-.285 2.827 2.827 0 0 1-1.137-.782 2.851 2.851 0 0 1-.712-1.172c-.175-.461-.25-.957-.25-1.528 0-.531.07-1.032.25-1.493.18-.46.426-.852.747-1.207.32-.32.711-.606 1.137-.782a4.018 4.018 0 0 1 1.493-.285c.606 0 1.137.105 1.598.355.46.25.817.532 1.102.958.285.39.496.851.641 1.348.07.461.105.957.07 1.457h-4.782a1.876 1.876 0 0 0 .78 1.492zm2.275-3.467c-.25-.25-.642-.391-1.103-.391-.32 0-.566.07-.781.176-.215.105-.356.25-.496.39a.957.957 0 0 0-.25.497c-.036.175-.07.32-.07.46h3.196c-.07-.526-.25-.882-.497-1.132zm-3.127-3.553h3.978v.957h-3.978v-.957z"/>
+                        </svg>
+                    </span>
+                    Behance Portfolio
+                </a>
+                <a href="#" class="contact-link btn" id="download-cv-footer">Download CV</a>
+            </div>
+          
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Ahmed Mohamed.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Download CV functionality
+        document.getElementById('download-cv').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('CV download functionality would be implemented here.');
+        });
+        
+        document.getElementById('download-cv-footer').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('CV download functionality would be implemented here.');
+     
+        });
+    </script>
+</body>
+</html>
