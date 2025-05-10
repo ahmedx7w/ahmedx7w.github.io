@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وظفني - أحمد</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --accent: #FFC107;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --transition: all 0.3s ease;
+            --card-bg: #252525;
+            --border-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 16px;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent);
+        }
+
+        header {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            background-color: var(--main-bg);
+            z-index: 100;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            right: 0;
+            background-color: var(--accent);
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .youtube-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .youtube-link svg {
+            fill: #FF0000;
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background-color: var(--secondary-bg);
+                position: absolute;
+                top: 100%;
+                right: 0;
+                padding: 1rem;
+                width: 100%;
+            }
+
+            .nav-links.nav-open {
+                display: flex;
+            }
+        }
+
+        .hero {
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><circle cx="20" cy="20" r="10" fill="%23ffffff"/><polygon points="50,10 60,30 40,30" fill="%23ffffff"/><rect x="70" y="10" width="20" height="20" fill="%23ffffff"/><path d="M10,70 Q30,50 50,70 T90,70" stroke="%23ffffff" fill="none"/></svg>');
+            z-index: 1;
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .services-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .services-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .service-content {
+            flex: 1;
+        }
+
+        .service-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-image svg, .service-image img {
+            width: 100px;
+            height: auto;
+        }
+
+        .service-image svg, .service-image svg path, .service-image svg circle, .service-image svg rect, .service-image svg line {
+            stroke: var(--accent) !important;
+             fill: none;
+        }
+        .service-image svg path[fill]:not([fill="none"]) {
+            fill: var(--accent) !important;
+        }
+
+        .service-title {
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .contact-section {
+            padding: 60px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 60px; /* Added space below this section */
+        }
+
+        .contact-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            font-family: 'Cairo', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent);
+            color: var(--main-bg);
+        }
+
+        .direct-contact {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .email-link {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer {
+            padding: 2rem 0;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 992px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+           <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="https://raw.githubusercontent.com/ahmedx7w/ahmedx7w.github.io/main/bnbn.pdf">الأعمال</a>
+                <a href="about_me.html">من أنا؟</a>
+                <a href="#">قالوا عني</a>
+                <a href="hireMe.html" class="active">وظفني</a>
+            </nav>
+            <a href="#" class="youtube-link">
+                <span>قناتي على YouTube</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <h1 class="hero-title">وظفني!</h1>
+    </section>
+
+    <section class="services-container">
+        <h2 class="services-title">يمكنني مساعدتك في هذه المجالات</h2>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-content">
+                    <h3 class="service-title">تصميم وبناء الهويات البصرية</h3>
+                    <p class="service-description">بما أن الهوية البصرية هي اللبنة الأولى لتمييز مشروعك عن المنافسين، فسوف أقوم ببناء هوية بصرية قوية ومميزة، تستطيع من خلالها الوصول لعملائك والجمهور المستهدف بفعالية ومكانة عالية.</p>
+                    <div class="service-tags">
+                        <span class="tag">تصميم الشعارات</span>
+                        <span class="tag">تصميم الهويات البصرية</span>
+                        <span class="tag">إعادة بناء الهويات البصرية</span>
+                        <span class="tag">تصميم دليل الهوية البصرية</span>
+                    </div>
+                </div>
+                <div class="service-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="60" cy="60" r="45" stroke-width="2"/>
+                        <path d="M38 70L48 80L82 46" stroke-width="4"/>
+                        <rect x="40" y="30" width="40" height="30" rx="2" stroke-width="2"/>
+                        <line x1="50" y1="42" x2="70" y2="42" stroke-width="2"/>
+                        <line x1="50" y1="48" x2="65" y2="48" stroke-width="2"/>
+                        <circle cx="90" cy="35" r="10" stroke-width="2"/>
+                        <path d="M88 35L92 35M90 33L90 37" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-content">
+                    <h3 class="service-title">تصميم واجهات الاستخدام UX/UI</h3>
+                    <p class="service-description">تصميم واجهات استخدام بتجربة حول المستخدم UCD، مع الحرص على بناء واجهات جذابة يمكنها انطلاقا من الهوية البصرية. وإذا كان المشروع قائم بالفعل، يمكنني المساعدة في تحسين تجربة المستخدم.</p>
+                    <div class="service-tags">
+                        <span class="tag">تصميم تطبيقات الويب</span>
+                        <span class="tag">تصميم الصفحات الهبوطية</span>
+                        <span class="tag">تصميم تطبيقات الجوال</span>
+                        <span class="tag">تصميم المواقع الإلكترونية</span>
+                        <span class="tag">تحسين تجربة المستخدم</span>
+                        <span class="tag">إستشارات تجربة المستخدم</span>
+                    </div>
+                </div>
+                <div class="service-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="20" y="25" width="80" height="55" rx="2" stroke-width="2"/>
+                        <rect x="25" y="30" width="70" height="45" rx="1" stroke-width="2"/>
+                        <circle cx="45" cy="90" r="5" stroke-width="2"/>
+                        <circle cx="75" cy="90" r="5" stroke-width="2"/>
+                        <line x1="45" y1="85" x2="45" y2="80" stroke-width="2"/>
+                        <line x1="75" y1="85" x2="75" y2="80" stroke-width="2"/>
+                        <rect x="35" y="40" width="20" height="5" rx="1" stroke-width="2"/>
+                        <rect x="35" y="50" width="50" height="5" rx="1" stroke-width="2"/>
+                        <rect x="35" y="60" width="35" height="5" rx="1" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <section class="contact-section">
+        <h2 class="contact-title">هل لديك مشروع؟</h2>
+         <form action="https://formspree.io/f/xwpoqjrr" method="POST" class="contact-form">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="اسمك الكريم" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" class="form-control" placeholder="بريدك الإلكتروني" required>
+            </div>
+            <div class="form-group">
+                <textarea name="message" class="form-control" placeholder="رسالتك" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">أرسل رسالتك</button>
+        </form>
+        <div class="direct-contact">
+            <p>أو يمكنك مراسلتي مباشرة على: <a href="mailto:ahmedx7w@gmail.com" class="email-link">ahmedx7w@gmail.com</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text"> جميع الحقوق محفوظة لـ أحمد عمر 2025 ©</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('nav-open');
+        }
+    </script>
+</body>
+</html>
