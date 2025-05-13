@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وظفني | أحمد عبدالله - مصمم جرافيك وويب</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --accent: #FFC107;
+            --accent-dark: #FFA000;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 16px;
+            --card-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            --card-shadow-hover: 0 16px 32px rgba(0,0,0,0.3);
+            --section-spacing: 8rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 18px;
+            direction: rtl;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        /* Header - Same as main site */
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 101;
+        }
+
+        .menu-toggle:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            bottom: -4px;
+            right: 50%;
+            transform: translateX(50%) rotate(45deg);
+            background-color: var(--accent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+            bottom: 0;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a.active::before {
+            opacity: 1;
+            bottom: 0;
+        }
+
+        .blog-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        .blog-link:hover {
+            color: var(--accent);
+            background-color: rgba(255, 193, 7, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section for Hire Me */
+        .hire-hero {
+            padding: var(--section-spacing) 0;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .hire-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(255,193,7,0.08) 0%, rgba(18,18,18,0) 60%);
+            z-index: -1;
+        }
+
+        .hire-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hire-hero h1::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            bottom: 5px;
+            right: 0;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            z-index: -1;
+            opacity: 0.3;
+            border-radius: 4px;
+        }
+
+        .hire-hero p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Services Section */
+        .services {
+            padding: var(--section-spacing) 0;
+            background-color: var(--secondary-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFC107' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 5rem;
+            position: relative;
+            display: inline-block;
+            font-weight: 800;
+            text-align: center;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background-color: var(--main-bg);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow-hover);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 193, 7, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .service-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--accent);
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .service-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            position: relative;
+            padding-right: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .service-features li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            transform: rotate(45deg);
+        }
+
+        /* Process Section */
+        .process {
+            padding: var(--section-spacing) 0;
+            position: relative;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #000;
+            font-weight: 800;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+        }
+
+        .step-content {
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            flex-grow: 1;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            padding: var(--section-spacing) 0;
+            background-color: var(--secondary-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,193,7,0.1) 0%, rgba(255,193,7,0) 70%);
+            z-index: 0;
+        }
+
+        .contact-form-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,193,7,0.1) 0%, rgba(255,193,7,0) 70%);
+            z-index: 0;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 800;
+            text-align: center;
+            position: relative;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+
+        .form-description {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .hire-form {
+            background-color: var(--main-bg);
+            padding: 4rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--secondary-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--border-radius);
+            color: var(--text-color);
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--main-bg);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 193, 7, 0.4);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 0 3rem;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background-color: rgba(255, 193, 7, 0.1);
+            transform: translateY(-5px);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent);
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .service-card, .process-step, .hire-form {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .process-step:nth-child(1) { animation-delay: 0.1s; }
+        .process-step:nth-child(2) { animation-delay: 0.2s; }
+        .process-step:nth-child(3) { animation-delay: 0.3s; }
+        .process-step:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            :root {
+                --section-spacing: 6rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hire-hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 5rem;
+                --border-radius: 12px;
+            }
+
+            body {
+                font-size: 16px;
+            }
+
+            .hire-hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 4rem;
+            }
+
+            .service-card {
+                padding: 2.5rem;
+            }
+
+            .hire-form {
+                padding: 3rem 2rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background-color: var(--secondary-bg);
+                position: fixed;
+                top: 0;
+                right: 0;
+                padding: 6rem 2rem 2rem;
+                width: 80%;
+                height: 100vh;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+            }
+
+            .nav-links a {
+                padding: 1rem 0;
+                font-size: 1.2rem;
+            }
+
+            .nav-open {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --section-spacing: 4rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hire-hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .hire-hero p {
+                font-size: 1.1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 3rem;
+            }
+
+            .form-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+           <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">الرئيسية</a>
+                <a href="works.html">الأعمال</a>
+                <a href="about_me.html">من أنا؟</a>
+                <a href="cs.html">دراسات الحالة</a>
+                <a href="hireMe.html" class="active">وظفني</a>
+            </nav>
+
+            <a href="blog.html" class="blog-link">
+                <span>المدونة</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L14.13 5.1l3.75 3.75 2.83-1.81zM3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="hire-hero">
+        <div class="container">
+            <h1>لنتعاون معًا في مشروعك القادم</h1>
+            <p>
+                سواء كنت بحاجة إلى تصميم هوية بصرية جديدة، أو تطوير موقع ويب، أو أي خدمة أخرى في مجال التصميم، أنا هنا لمساعدتك في تحقيق رؤيتك. دعنا نناقش مشروعك ونرى كيف يمكنني إضافة قيمة إلى عملك.
+            </p>
+            <a href="#contact" class="btn btn-primary">
+                تواصل معي الآن
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">الخدمات التي أقدمها</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">تصميم الهوية البصرية</h3>
+                    <p class="service-description">
+                        تصميم شامل للهوية البصرية يشمل الشعار، الألوان، الخطوط، وأدلة الاستخدام لضمان اتساق الهوية عبر جميع المنصات.
+                    </p>
+                    
+                    <ul class="service-features">
+                        <li>تصميم شعار احترافي</li>
+                        <li>دليل الهوية البصرية</li>
+                        <li>ألوان ولوحات خطوط مخصصة</li>
+                        <li>تطبيقات الهوية (بطاقات عمل، أوراق رسمية)</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary btn-block">اطلب هذه الخدمة</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M3 5v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.11 0-2 .9-2 2zm12 4c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zm-9 8c0-2 4-3.1 6-3.1s6 1.1 6 3.1v1H6v-1z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">تصميم واجهات المستخدم UI/UX</h3>
+                    <p class="service-description">
+                        تصميم واجهات مستخدم جذابة وسهلة الاستخدام مع التركيز على تجربة المستخدم لضمان تحقيق أهداف المشروع.
+                    </p>
+                    
+                    <ul class="service-features">
+                        <li>تصميم واجهات تطبيقات ومواقع</li>
+                        <li>إجراء أبحاث تجربة المستخدم</li>
+                        <li>إنشاء نماذج أولية تفاعلية</li>
+                        <li>اختبارات قابلية الاستخدام</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary btn-block">اطلب هذه الخدمة</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+                            <path d="M7 12h2v5H7zm8-5h2v10h-2zm-4 7h2v3h-2zm0-4h2v2h-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">تصميم جرافيك</h3>
+                    <p class="service-description">
+                        حلول تصميم جرافيك مخصصة لاحتياجاتك التسويقية والإعلانية، من منشورات وسائل التواصل إلى المواد المطبوعة.
+                    </p>
+                    
+                    <ul class="service-features">
+                        <li>تصميم منشورات وسائل التواصل الاجتماعي</li>
+                        <li>إعلانات مطبوعة ورقمية</li>
+                        <li>تصاميم العروض التقديمية</li>
+                        <li>مواد تسويقية متنوعة</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary btn-block">اطلب هذه الخدمة</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">كيف أعمل</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">الاستماع والفهم</h3>
+                        <p class="step-description">
+                            نبدأ بالاستماع إليك وفهم احتياجاتك وأهداف مشروعك. أسأل الكثير من الأسئلة لضمان أنني أفهم تمامًا ما تريد تحقيقه.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">البحث والتخطيط</h3>
+                        <p class="step-description">
+                            أقوم بإجراء البحوث اللازمة وتطوير استراتيجية التصميم المناسبة. هذا يشمل تحليل المنافسين ودراسة الجمهور المستهدف.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">التصميم والتطوير</h3>
+                        <p class="step-description">
+                            أبدأ في تحويل الأفكار إلى تصاميم مبدئية، ثم أصقلها بناءً على ملاحظاتك حتى نصل إلى النتيجة النهائية التي ترضيك.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">التسليم والمتابعة</h3>
+                        <p class="step-description">
+                            بعد الانتهاء من المشروع، أسلمك جميع الملفات والموارد اللازمة. وأظل متاحًا لأي دعم أو تعديلات قد تحتاجها لاحقًا.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-form-section" id="contact">
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-title">لنتحدث عن مشروعك</h2>
+            <p class="form-description">
+                املأ النموذج أدناه وسأتواصل معك في غضون 24 ساعة لمناقشة مشروعك وكيف يمكنني مساعدتك في تحقيقه.
+            </p>
+            <form class="hire-form" action="https://formspree.io/f/xwpoqjrr" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">الاسم الكامل</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company" class="form-label">الشركة (اختياري)</label>
+                        <input type="text" id="company" name="company" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="form-label">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="service" class="form-label">نوع الخدمة المطلوبة</label>
+                    <select id="service" name="service" class="form-control" required>
+                        <option value="" disabled selected>اختر خدمة</option>
+                        <option value="branding">تصميم الهوية البصرية</option>
+                        <option value="ui-ux">تصميم واجهات المستخدم UI/UX</option>
+                        <option value="graphic">تصميم جرافيك</option>
+                        <option value="other">خدمة أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budget" class="form-label">الميزانية المتوقعة (اختياري)</label>
+                    <select id="budget" name="budget" class="form-control">
+                        <option value="" selected>اختر ميزانية</option>
+                        <option value="1-3">1,000 - 3,000 درهم</option>
+                        <option value="3-5">3,000 - 5,000 درهم</option>
+                        <option value="5-10">5,000 - 10,000 درهم</option>
+                        <option value="10+">أكثر من 10,000 درهم</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">أخبرني المزيد عن مشروعك</label>
+                    <textarea id="message" name="message" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">إرسال الطلب</button>
+            </form>
+        </div>
+      </div>
+     </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M24 4.56v14.88A4.56 4.56 0 0 1 19.44 24H4.56A4.56 4.56 0 0 1 0 19.44V4.56A4.56 4.56 0 0 1 4.56 0h14.88A4.56 4.56 0 0 1 24 4.56zM8.47 19.44v-8.53H5.66v8.53h2.81zm-.4-9.72c.98 0 1.77-.79 1.77-1.77s-.79-1.77-1.77-1.77-1.77.79-1.77 1.77.79 1.77 1.77 1.77zm10.86 9.72v-4.83c0-2.58-.55-4.56-3.56-4.56-1.45 0-2.42.79-2.81 1.54v-1.32h-2.81v8.53h2.81v-4.76c0-1.25.24-2.49 1.81-2.49s1.77 1.25 1.77 2.49v4.76h2.81z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 2.04c-5.52 0-10 4.48-10 10 0 4.42 2.88 8.16 6.84 9.48.5.09.68-.22.68-.48v-1.69c-2.78.6-3.36-1.34-3.36-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75.98a9.53 9.53 0 0 1 5 0c1.91-1.25 2.75-.98 2.75-.98.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.56.94.56 1.92v2.85c0 .26.18.57.69.49A10.01 10.01 0 0 0 22 12.04c0-5.52-4.48-10-10-10z"/>
+                    </svg>
+                </a>
+                <a href="https://www.behance.net/ahmedx7w" class="social-link" target="_blank" rel="noopener noreferrer">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22.136 9.526h-6.223c.167-1.385 1.187-2.111 2.625-2.111 1.06 0 1.885.32 2.58.976l.918-1.43c-.903-.804-2.122-1.246-3.531-1.246-2.881 0-4.761 1.889-4.761 4.845s1.88 4.834 4.593 4.834c2.771 0 4.548-1.815 4.548-4.402 0-.273-.024-.531-.067-.787zm-6.083 2.264c.085-.889.725-1.398 1.696-1.398 1.015 0 1.62.509 1.665 1.398h-3.361zM9.634 10.454c.706-.375 1.166-1.093 1.166-2.001 0-1.798-1.33-2.708-3.508-2.708H0v10.511h7.733c2.299 0 3.641-1.177 3.641-3.098 0-1.243-.637-2.103-1.74-2.704zm-6.492-2.486h2.642c.964 0 1.518.426 1.518 1.188 0 .796-.566 1.222-1.595 1.222H3.142v-2.41zm2.779 6.594H3.142v-2.618h2.735c1.12 0 1.694.45 1.694 1.31 0 .91-.596 1.308-1.65 1.308zM15.446 6.313h5.016v1.326h-5.016z"/>
+                  </svg>
+                  </a>
+            </div>
+        <div class="container">
+            
+            <p class="footer-text">جميع الحقوق محفوظة لـ أحمد عمر © 2025</p>
+        </div>
+    </footer>

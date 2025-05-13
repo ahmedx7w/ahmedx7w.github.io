@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أعمالي | أحمد عمر - مصمم جرافيك وويب</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- Base Styles, Variables, Header, Footer (Copied from previous example) --- */
+        :root {
+            --main-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --accent: #FFC107;
+            --accent-dark: #FFA000;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 16px;
+            --card-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            --card-shadow-hover: 0 16px 32px rgba(0,0,0,0.3);
+            --section-spacing: 7rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 18px;
+            direction: rtl;
+            scroll-behavior: smooth;
+            background: var(--main-bg) radial-gradient(circle at 90% 10%, rgba(255,193,7,0.05) 0%, rgba(18,18,18,0) 30%); /* Adjusted gradient position */
+        }
+
+        .container {
+            max-width: 1200px; /* Wider container for grid */
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; color: var(--text-color); cursor: pointer; transition: var(--transition); z-index: 101; }
+        .menu-toggle:hover { color: var(--accent); transform: rotate(90deg); }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-weight: 600; position: relative; font-size: 1.1rem; padding: 0.5rem 0; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a::before { content: ''; position: absolute; width: 8px; height: 8px; bottom: -4px; right: 50%; transform: translateX(50%) rotate(45deg); background-color: var(--accent); opacity: 0; transition: var(--transition); }
+        .nav-links a:hover::before { opacity: 1; bottom: 0; }
+        .nav-links a.active { color: var(--accent); }
+        .nav-links a.active::before { opacity: 1; bottom: 0; }
+        .blog-link { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; border-radius: 50px; transition: var(--transition); background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.2); }
+        .blog-link:hover { color: var(--accent); background-color: rgba(255, 193, 7, 0.2); transform: translateY(-2px); }
+        .blog-link svg { transition: transform 0.3s ease; }
+        .blog-link:hover svg { transform: rotate(45deg); }
+        /* End Header */
+
+        /* --- Works Section --- */
+        .works-section {
+            padding: var(--section-spacing) 0;
+            position: relative;
+        }
+
+        .works-intro {
+            text-align: center;
+            margin-bottom: 5rem; /* More space before grid */
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .works-title { /* Similar to about-title */
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .works-subtitle { /* Similar to about-subtitle */
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Portfolio Grid & Item Styles (Copied from ssssss.html, slightly refined) */
+        .portfolio-grid {
+            display: grid;
+            /* Adjusted minmax for potentially wider cards */
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .portfolio-item {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+             opacity: 0; /* Animation */
+            animation: fadeIn 1s ease forwards;
+             /* Stagger animation needs JS or manual assignment if pure CSS */
+        }
+
+        /* Stagger animation for items */
+         .portfolio-item:nth-child(1) { animation-delay: 0.4s; }
+        .portfolio-item:nth-child(2) { animation-delay: 0.5s; }
+        .portfolio-item:nth-child(3) { animation-delay: 0.6s; }
+        /* Add more nth-child delays as needed */
+
+
+        .portfolio-item:hover {
+            transform: translateY(-10px); /* Slightly less lift than original */
+            box-shadow: var(--card-shadow-hover);
+            border-color: rgba(255, 193, 7, 0.2); /* Subtle border highlight */
+        }
+
+        /* Top border animation on hover */
+         .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px; /* Slightly thinner */
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+            z-index: 2; /* Ensure above image */
+        }
+
+        .portfolio-item:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 350px; /* Adjusted height */
+            overflow: hidden;
+            position: relative;
+            background-color: #2a2a2a; /* Placeholder bg */
+        }
+
+         /* Image overlay effect */
+         .portfolio-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(18,18,18,0.8) 0%, transparent 50%); /* Darker gradient */
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .portfolio-item:hover .portfolio-image::after {
+            opacity: 1;
+        }
+
+        .portfolio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); /* Smoother zoom */
+        }
+
+        .portfolio-item:hover .portfolio-image img {
+            transform: scale(1.08); /* Slightly more zoom */
+        }
+
+        .portfolio-content {
+            padding: 2rem 2.5rem; /* Adjusted padding */
+        }
+
+        .portfolio-category {
+            color: var(--accent);
+            font-size: 0.9rem; /* Smaller category */
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .portfolio-title {
+            font-size: 1.6rem; /* Adjusted title size */
+            margin-bottom: 1rem;
+            font-weight: 700; /* Less heavy */
+            line-height: 1.4;
+            color: var(--text-color); /* Ensure contrast */
+        }
+
+        .portfolio-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7; /* Adjusted line height */
+            font-size: 1rem; /* Adjusted text size */
+        }
+
+        .portfolio-status { /* Status icon from original */
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; /* Reduced gap */
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        .status-icon {
+            width: 18px; /* Smaller icon */
+            height: 18px;
+            fill: var(--text-secondary);
+        }
+
+        /* Download Section */
+        .download-section {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .download-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 193, 7, 0.05);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 193, 7, 0.1);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+            color: #121212;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+        }
+
+        .download-btn:hover svg {
+            transform: translateY(3px);
+        }
+
+        /* --- Footer (Exact copy) --- */
+        footer {
+            padding: 5rem 0 3rem;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin-top: var(--section-spacing);
+        }
+        .footer-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        /* --- End Footer --- */
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive --- */
+         @media (max-width: 1200px) {
+            .portfolio-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                 gap: 2.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .works-title { font-size: 3rem; }
+            .works-subtitle { font-size: 1.2rem; }
+            .portfolio-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                 gap: 2rem;
+            }
+             .portfolio-image { height: 320px; }
+        }
+
+        @media (max-width: 768px) {
+             :root { --section-spacing: 5rem; --border-radius: 12px; }
+            body { font-size: 16px; }
+             .works-section { padding: 4rem 0; }
+             .works-intro { margin-bottom: 4rem; }
+             .works-title { font-size: 2.8rem; }
+             .works-subtitle { font-size: 1.1rem; }
+
+             .portfolio-grid {
+                 grid-template-columns: 1fr; /* Stack on smaller screens */
+                 gap: 2.5rem;
+            }
+             .portfolio-image { height: 300px; }
+             .portfolio-title { font-size: 1.5rem; }
+             .portfolio-description { font-size: 0.95rem;}
+
+            /* Responsive Nav */
+            .menu-toggle { display: block; }
+            .nav-links { display: none; flex-direction: column; gap: 1rem; background-color: var(--secondary-bg); position: fixed; top: 0; right: 0; padding: 6rem 2rem 2rem; width: 80%; height: 100vh; box-shadow: -10px 0 30px rgba(0,0,0,0.3); transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+            .nav-links.nav-open { transform: translateX(0); display: flex; }
+            .nav-links a { padding: 1rem 0; font-size: 1.2rem; }
+
+            /* Download section responsive */
+            .download-container {
+                padding: 1.5rem;
+            }
+            .download-btn {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+             :root { --section-spacing: 4rem; }
+             .container { padding: 0 1.5rem; }
+             .works-title { font-size: 2.4rem; }
+             .works-subtitle { font-size: 1rem; }
+             .portfolio-image { height: 280px; }
+             .portfolio-content { padding: 1.5rem 2rem; }
+             .portfolio-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+           <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+             <nav class="nav-links" id="navLinks">
+                <a href="index.html">الرئيسية</a>
+                <a href="works.html" class="active">الأعمال</a>
+                <a href="about_me.html">من أنا؟</a>
+                <a href="cs.html">دراسات الحالة</a>
+                <a href="hireMe.html">وظفني</a>
+            </nav>
+             <a href="blog.html" class="blog-link">
+                <span>المدونة</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L14.13 5.1l3.75 3.75 2.83-1.81zM3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="works-section">
+        <div class="container">
+
+            <div class="works-intro">
+                <h1 class="works-title">أعمالي</h1>
+                <p class="works-subtitle">نظرة على بعض المشاريع التي تشرفت بالعمل عليها، والتي تعكس تنوع خبراتي وشغفي بالتصميم المبتكر.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://i.ibb.co/GQGNPVbQ/2.jpg" alt="مدونة الكترونية ومتجر ومركز دورات" loading="lazy" />
+                    </div>
+                    <div class="portfolio-content">
+                        <p class="portfolio-category">هوية بصرية</p>
+                        <h3 class="portfolio-title">تصميم لهوية بصرية لعلامة تجارية</h3>
+                        <p class="portfolio-description">
+                            بناء هوية بصرية متكاملة لشركة ، تشمل تصميم الشعار، لوحة الألوان، الخطوط، وتطبيقات الهوية على المنتجات والمواد التسويقية.
+                        </p>
+                    
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <img src="https://i.ibb.co/4R1HrNB0/Frame-3.png" alt="واجهة الاستخدام" loading="lazy"/>
+                    </div>
+                    <div class="portfolio-content">
+                        <p class="portfolio-category">واجهات المستخدم UI/UX</p>
+                        <h3 class="portfolio-title">تصميم لموقع شركة في مجال الازياء</h3>
+                        <p class="portfolio-description">تصميم واجهة وتجربة مستخدم لمنصة تجمع بين الازياء والمستحضرات ، متجر للمنتجات، مع التركيز على سهولة التصفح وتحفيز المستخدم.
+                        </p>
+                        </div>
+                </div>
+            </div>
+
+            <!-- Download Portfolio Section -->
+            <div class="download-section">
+                <div class="download-container">
+                    <h3>نسخة قابلة للتنزيل من أعمالي</h3>
+                    <p class="portfolio-description">
+                        يمكنك تحميل نسخة PDF من أعمالي لتصفحها بسهولة أو مشاركتها مع الآخرين. تحتوي على ملخص لبعض المشاريع وخبراتي.
+                    </p>
+                    <a class="download-btn" href="https://raw.githubusercontent.com/ahmedx7w/ahmedx7w.github.io/main/bnbn.pdf" target="_blank">
+                        <span>تحميل البورتفوليو PDF</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                    </a>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem; opacity: 0.8;">
+                        حجم الملف: ~13MB | متوافق مع جميع الأجهزة
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">جميع الحقوق محفوظة لـ أحمد عمر © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('nav-open');
+        }
+
+        // Simple Intersection Observer for fade-in animation (optional)
+        // You might want to refine this for better performance on pages with many items
+         document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.works-intro, .portfolio-item');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.target.style.opacity === '0') {
+                         // Let the CSS animation handle the transition
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animateElements.forEach(element => {
+                 observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من أنا؟ | أحمد عمر - مصمم يُحول الأفكار إلى واقع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --accent: #FFC107;
+            --accent-dark: #FFA000;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 16px;
+            --card-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            --card-shadow-hover: 0 16px 32px rgba(0,0,0,0.3);
+            --section-spacing: 7rem; /* Slightly adjusted spacing */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 18px;
+            direction: rtl;
+            scroll-behavior: smooth;
+            /* Added subtle gradient */
+            background: var(--main-bg) radial-gradient(circle at 10% 10%, rgba(255,193,7,0.05) 0%, rgba(18,18,18,0) 30%);
+        }
+
+        .container {
+            max-width: 1100px; /* Slightly narrower container for focus */
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        /* --- Header (Exact copy from previous) --- */
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; color: var(--text-color); cursor: pointer; transition: var(--transition); z-index: 101; }
+        .menu-toggle:hover { color: var(--accent); transform: rotate(90deg); }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-weight: 600; position: relative; font-size: 1.1rem; padding: 0.5rem 0; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a::before { content: ''; position: absolute; width: 8px; height: 8px; bottom: -4px; right: 50%; transform: translateX(50%) rotate(45deg); background-color: var(--accent); opacity: 0; transition: var(--transition); }
+        .nav-links a:hover::before { opacity: 1; bottom: 0; }
+        .nav-links a.active { color: var(--accent); }
+        .nav-links a.active::before { opacity: 1; bottom: 0; }
+        .blog-link { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; border-radius: 50px; transition: var(--transition); background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.2); }
+        .blog-link:hover { color: var(--accent); background-color: rgba(255, 193, 7, 0.2); transform: translateY(-2px); }
+        .blog-link svg { transition: transform 0.3s ease; }
+        .blog-link:hover svg { transform: rotate(45deg); }
+        /* --- End Header --- */
+
+        /* --- Enhanced About Section --- */
+        .about-section {
+            padding: var(--section-spacing) 0;
+            position: relative;
+            overflow: hidden; /* Contain potential pseudo-elements */
+        }
+
+        .about-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0; /* For animation */
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .about-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .about-main-content {
+            display: flex;
+            gap: 4rem;
+            align-items: center; /* Center vertically */
+            background-color: var(--secondary-bg); /* Card background */
+            padding: 4rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: var(--card-shadow);
+            opacity: 0; /* For animation */
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        .about-image-wrapper {
+            width: 35%; /* Adjust size */
+            flex-shrink: 0;
+            position: relative; /* For hover effect */
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            border: 5px solid var(--accent); /* Slightly thicker border */
+            box-shadow: 0 10px 30px rgba(0,0,0, 0.2);
+            display: block; /* Remove extra space below image */
+            margin: 0 auto; /* Center if wrapper is wider */
+            transition: var(--transition);
+        }
+
+        /* Enhanced image hover */
+        .about-image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: calc(100% + 10px); /* Adjust size relative to image */
+            height: calc(100% + 10px);
+             max-width: 310px; /* Match image max-width + border */
+            max-height: 310px;
+            border-radius: 50%;
+            border: 2px dashed var(--accent);
+            transform: translate(-50%, -50%) scale(0.95);
+            opacity: 0;
+            transition: all 0.5s ease-out;
+            pointer-events: none; /* Allow clicking the image */
+        }
+
+        .about-image-wrapper:hover::after {
+            opacity: 0.6;
+            transform: translate(-50%, -50%) scale(1.05);
+             animation: pulseBorder 2s infinite linear;
+        }
+         .about-image-wrapper:hover img {
+             transform: scale(1.02); /* Subtle scale on image */
+             box-shadow: 0 15px 40px rgba(0,0,0, 0.3);
+         }
+
+
+        .about-text-content {
+            width: 65%;
+        }
+
+        .about-text-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(255,193,7,0.2);
+            display: inline-block; /* Fit border to text */
+        }
+
+        .about-text-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.9; /* Slightly more spacing */
+        }
+        .about-text-content strong {
+            color: var(--text-color);
+            font-weight: 600; /* Slightly less bold */
+        }
+
+        /* Styled blockquote for philosophy */
+        .about-philosophy blockquote {
+            border-right: 4px solid var(--accent);
+            padding-right: 1.5rem;
+            margin: 2rem 0;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-color);
+            line-height: 1.8;
+            background-color: rgba(255, 193, 7, 0.05); /* Subtle highlight */
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        .about-philosophy blockquote strong {
+             color: var(--accent); /* Highlight key part */
+             font-weight: 700;
+        }
+
+        /* Skills Section */
+        .about-skills ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .about-skills li {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+         .about-skills li:hover {
+             background-color: rgba(255, 193, 7, 0.1);
+             color: var(--accent);
+             border-color: rgba(255, 193, 7, 0.3);
+             transform: translateY(-2px);
+         }
+
+        /* --- Footer (Exact copy from previous) --- */
+        footer {
+            padding: 5rem 0 3rem;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin-top: var(--section-spacing);
+        }
+        .footer-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        /* --- End Footer --- */
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+         @keyframes pulseBorder {
+            0% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.6; }
+        }
+
+        /* Apply animation */
+        .about-main-content, .about-skills {
+             opacity: 0; /* For animation */
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.6s; /* Stagger animation */
+        }
+
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .about-main-content {
+                flex-direction: column;
+                padding: 3rem; /* Adjust padding */
+                align-items: center;
+                text-align: center;
+            }
+            .about-image-wrapper, .about-text-content {
+                width: 100%;
+                max-width: 550px; /* Limit width */
+            }
+            .about-image-wrapper {
+                margin-bottom: 3rem;
+            }
+            .about-text-content h3 {
+                 display: block; /* Allow centering */
+                 border-bottom: none;
+                 padding-bottom: 0;
+                 margin-bottom: 1rem;
+            }
+             .about-text-content h3::after { /* Add underline effect */
+                content: '';
+                display: block;
+                width: 60px;
+                height: 2px;
+                background: rgba(255,193,7,0.3);
+                margin: 0.75rem auto 1.5rem; /* Center */
+            }
+
+            .about-philosophy blockquote {
+                 border-right: none;
+                 border-top: 4px solid var(--accent);
+                 padding-right: 1.5rem; /* Reset padding */
+                 padding-top: 1.5rem;
+                 text-align: center;
+            }
+
+             .about-skills ul {
+                 justify-content: center;
+             }
+        }
+
+        @media (max-width: 768px) {
+             :root { --section-spacing: 5rem; --border-radius: 12px; }
+            body { font-size: 16px; }
+            .about-section { padding: 4rem 0; }
+            .about-title { font-size: 2.8rem; }
+            .about-subtitle { font-size: 1.2rem; }
+            .about-main-content { padding: 2rem; }
+            .about-text-content h3 { font-size: 1.6rem; }
+            .about-text-content p { font-size: 1rem; }
+            .about-philosophy blockquote { font-size: 1.1rem; }
+            .about-skills li { font-size: 0.9rem; padding: 0.5rem 1rem; }
+
+            /* Responsive Nav */
+             .menu-toggle { display: block; }
+            .nav-links { display: none; flex-direction: column; gap: 1rem; background-color: var(--secondary-bg); position: fixed; top: 0; right: 0; padding: 6rem 2rem 2rem; width: 80%; height: 100vh; box-shadow: -10px 0 30px rgba(0,0,0,0.3); transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+            .nav-links.nav-open { transform: translateX(0); display: flex; }
+            .nav-links a { padding: 1rem 0; font-size: 1.2rem; }
+        }
+
+        @media (max-width: 576px) {
+             :root { --section-spacing: 4rem; }
+             .container { padding: 0 1.5rem; }
+             .about-title { font-size: 2.4rem; }
+             .about-subtitle { font-size: 1.1rem; }
+              .about-image-wrapper img { max-width: 220px; border-width: 4px;}
+               .about-image-wrapper::after { max-width: 228px; max-height: 228px;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+           <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+             <nav class="nav-links" id="navLinks">
+                <a href="index.html">الرئيسية</a>
+                <a href="works.html">الأعمال</a>
+                <a href="about_me.html" class="active">من أنا؟</a>
+                <a href="cs.html">دراسات الحالة</a>
+                <a href="hireMe.html">وظفني</a>
+            </nav>
+             <a href="blog.html" class="blog-link">
+                <span>المدونة</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L14.13 5.1l3.75 3.75 2.83-1.81zM3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="about-section">
+        <div class="container">
+
+            <div class="about-intro">
+                <h1 class="about-title">أهلاً بك في مساحتي الإبداعية</h1>
+                <p class="about-subtitle">لمحة عني ، وشغفي بتحويل الأفكار إلى تجارب بصرية فريدة.</p>
+            </div>
+
+            <div class="about-main-content">
+                <div class="about-image-wrapper">
+                    <img src="https://i.imgur.com/iCMtfsi.png" alt="أحمد عمر - مصمم جرافيك وويب" />
+                </div>
+                <div class="about-text-content">
+                    <div class="about-journey">
+                        <h3>رحلتي في التصميم</h3>
+                        <p>
+                           اسمي <strong>أحمد عمر</strong>، مصمم من السودان، متحصل على بكلاريوس الشرف في الهندسة. أعمل وأقيم حالياً في أبوظبي. بدأت رحلتي في عالم التصميم الشاسع عام <strong>2013</strong>، ومنذ ذلك الحين، وأنا أغوص في أعماقه بشغف لا ينضب. أجد متعتي في نسج الخيوط بين الجمال البصري والوظائف العملية.
+                        </p>
+                         <p>
+                            تخصصتُ واهتممت بشكل خاص بمجال <strong>بناء الهويات البصرية</strong> للعلامات التجارية، بالإضافة إلى تصميم <strong>واجهات وتجارب المستخدم (UX/UI)</strong> التي تجعل التفاعل الرقمي سلساً وممتعاً.
+                        </p>
+                    </div>
+
+                    <div class="about-philosophy">
+                         <h3>فلسفتي</h3>
+                         <blockquote>
+                            "أؤمن بأن <strong>التفاصيل الصغيرة هي التي تصنع الفارق الكبير</strong>. التصميم الجيد في نظري ليس مجرد مظهر جذاب، بل هو توازن دقيق يجمع بين <strong>الجمال الأخاذ والوظيفة الفعالة</strong>. الجمالية ليست كل شيء، <strong>الوظيفية أولاً</strong>."
+                         </blockquote>
+                    </div>
+
+                     <div class="about-skills">
+                        <h3>أبرز مهاراتي</h3>
+                         <ul>
+                             <li>تصميم الهوية البصرية</li>
+                             <li>تصميم المحتوى الترويجي</li>
+                             <li>تصميم واجهات المستخدم (UI)</li>
+                             <li>تصميم تجربة المستخدم (UX)</li>
+                             <li>تصميم المواقع الالكترونية</li>
+                             <li>التفكير التصميمي</li>
+                             <li>Figma / Adobe XD</li>
+                             <li>Adobe Photoshop</li>
+                              <li>Adobe Illustrator</li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        
+        <div class="container">
+            <p class="footer-text">جميع الحقوق محفوظة لـ أحمد عمر © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('nav-open');
+        }
+
+        // Simple Intersection Observer for fade-in animation
+         document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.about-intro, .about-main-content, .about-skills');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Check if element is intersecting and hasn't been animated yet
+                    if (entry.isIntersecting && entry.target.style.opacity === '0') {
+                        // The animation CSS rule will take over
+                        // No need to manually set opacity to 1 here
+                         // Optionally unobserve after animation starts
+                         // observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% visible
+
+            animateElements.forEach(element => {
+                 observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

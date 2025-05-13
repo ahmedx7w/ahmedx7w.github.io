@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقالة - أحمد عبدالله | مدونة التصميم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --accent: #FFC107;
+            --accent-dark: #FFA000;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 16px;
+            --card-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            --card-shadow-hover: 0 16px 32px rgba(0,0,0,0.3);
+            --section-spacing: 8rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 18px;
+            direction: rtl;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        /* Enhanced Header with Glass Morphism */
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 101;
+        }
+
+        .menu-toggle:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            bottom: -4px;
+            right: 50%;
+            transform: translateX(50%) rotate(45deg);
+            background-color: var(--accent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+            bottom: 0;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a.active::before {
+            opacity: 1;
+            bottom: 0;
+        }
+
+        .blog-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        .blog-link:hover {
+            color: var(--accent);
+            background-color: rgba(255, 193, 7, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .blog-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .blog-link:hover svg {
+            transform: rotate(45deg);
+        }
+
+        /* Article Section */
+        .article {
+            padding: var(--section-spacing) 0;
+            position: relative;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: right;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .article-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            bottom: 5px;
+            right: 0;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            z-index: -1;
+            opacity: 0.3;
+            border-radius: 4px;
+        }
+
+        .article-meta {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            position: relative;
+            border-radius: var(--border-radius);
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .article-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .article-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+        }
+
+        .article-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer with Social Links */
+        footer {
+            padding: 5rem 0 3rem;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background-color: rgba(255, 193, 7, 0.1);
+            transform: translateY(-5px);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent);
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .article-content {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            :root {
+                --section-spacing: 6rem;
+            }
+
+            .article-title {
+                font-size: 2.5rem;
+            }
+
+            .article-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .article-title {
+                font-size: 2.2rem;
+            }
+
+            .article-image {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 5rem;
+                --border-radius: 12px;
+            }
+
+            body {
+                font-size: 16px;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-image {
+                height: 200px;
+            }
+
+            .article-text {
+                font-size: 1.1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background-color: var(--secondary-bg);
+                position: fixed;
+                top: 0;
+                right: 0;
+                padding: 6rem 2rem 2rem;
+                width: 80%;
+                height: 100vh;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+            }
+
+            .nav-links a {
+                padding: 1rem 0;
+                font-size: 1.2rem;
+            }
+
+            .nav-open {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --section-spacing: 4rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .article-title {
+                font-size: 1.8rem;
+            }
+
+            .article-image {
+                height: 150px;
+            }
+
+            .article-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">الرئيسية</a>
+                <a href="works.html">الأعمال</a>
+                <a href="about_me.html">من أنا؟</a>
+                <a href="cs.html">دراسات الحالة</a>
+                <a href="hireMe.html">وظفني</a>
+            </nav>
+
+            <a href="blog.html" class="blog-link">
+                <span>المدونة</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L14.13 5.1l3.75 3.75 2.83-1.81zM3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="article">
+        <div class="container article-content">
+            <h1 class="article-title">أسرار التصميم البصري المميز</h1>
+            <p class="article-meta">نُشر في 5 يناير 2025 بواسطة أحمد عمر</p>
+            <div class="article-image">
+                <img src="https://www.shutterstock.com/image-vector/vector-illustration-web-design-development-600nw-2370026289.jpg" alt="تصميم بصري" />
+            </div>
+            <div class="article-text">
+                <p>التصميم البصري المميز يعتمد على عدة عناصر أساسية تجعل العمل يبرز وسط المنافسة. أولاً، اختيار الألوان المناسبة يلعب دورًا كبيرًا في إيصال الرسالة وخلق انطباع قوي. يجب أن تكون الألوان متناغمة وتعكس هوية العلامة التجارية.</p>
+                <p>ثانيًا، الخطوط تعتبر لغة التصميم الخفية. استخدام خطوط متنوعة ولكن متكاملة يضيف عمقًا ووضوحًا للتصميم. على سبيل المثال، يمكن دمج خط عريض مع خط رفيع لإبراز العناوين والنصوص الفرعية.</p>
+                <p>أخيرًا، التوازن والتناسق في ترتيب العناصر البصرية يضمن تجربة مريحة للعين. السر الحقيقي يكمن في التجربة والتعديل المستمر للوصول إلى نتيجة مثالية تلبي احتياجات الجمهور.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/ahmedx7w" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577 0-.285-.011-1.038-.017-2.038-3.338.724-4.042-1.611-4.042-1.611-.546-1.385-1.332-1.754-1.332-1.754-1.087-.744.082-.729.082-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.762-1.604-2.665-.305-5.467-1.332-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.123-.305-.535-1.528.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02-.005 2.042.138 3.001.405 2.291-1.552 3.297-1.23 3.297-1.23.654 1.648.243 2.871.12 3.176.771.84 1.235 1.91 1.235 3.221 0 4.61-2.807 5.625-5.479 5.921.43.372.814 1.104.814 2.222 0 1.604-.015 2.896-.015 3.287 0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12 24 5.37 18.63 0 12 0z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/ahmedx7w" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5v-9h3v9zm-1.5-10.5c-.966 0-1.5-.534-1.5-1.5 0-.966.534-1.5 1.5-1.5s1.5.534 1.5 1.5c0 .966-.534 1.5-1.5 1.5zM19 19h-3v-4.5c0-1.5-.5-2.5-1.5-2.5-1 0-1.5.5-1.5 2.5V19h-3v-9h3v1.5c.5-.5 1-1 2-1 2 0 3 1.5 3 3.5V19z"/>
+                    </svg>
+                </a>
+                <a href="https://www.behance.net/ahmedx7w" class="social-link" target="_blank" rel="noopener noreferrer">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22.136 9.526h-6.223c.167-1.385 1.187-2.111 2.625-2.111 1.06 0 1.885.32 2.58.976l.918-1.43c-.903-.804-2.122-1.246-3.531-1.246-2.881 0-4.761 1.889-4.761 4.845s1.88 4.834 4.593 4.834c2.771 0 4.548-1.815 4.548-4.402 0-.273-.024-.531-.067-.787zm-6.083 2.264c.085-.889.725-1.398 1.696-1.398 1.015 0 1.62.509 1.665 1.398h-3.361zM9.634 10.454c.706-.375 1.166-1.093 1.166-2.001 0-1.798-1.33-2.708-3.508-2.708H0v10.511h7.733c2.299 0 3.641-1.177 3.641-3.098 0-1.243-.637-2.103-1.74-2.704zm-6.492-2.486h2.642c.964 0 1.518.426 1.518 1.188 0 .796-.566 1.222-1.595 1.222H3.142v-2.41zm2.779 6.594H3.142v-2.618h2.735c1.12 0 1.694.45 1.694 1.31 0 .91-.596 1.308-1.65 1.308zM15.446 6.313h5.016v1.326h-5.016z"/>
+                  </svg>
+                  </a>
+            </div>
+            <p class="footer-text">جميع الحقوق محفوظة لـ أحمد عمر © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('nav-open');
+        }
+    </script>
+</body>
+</html>

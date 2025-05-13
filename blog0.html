@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيف تبدأ مشروعك الخاص في مجال التصميم | مدونة التصميم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --accent: #FFC107;
+            --accent-dark: #FFA000;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 16px;
+            --card-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            --card-shadow-hover: 0 16px 32px rgba(0,0,0,0.3);
+            --section-spacing: 8rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 18px;
+            direction: rtl;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        /* Enhanced Header with Glass Morphism */
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 101;
+        }
+
+        .menu-toggle:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            bottom: -4px;
+            right: 50%;
+            transform: translateX(50%) rotate(45deg);
+            background-color: var(--accent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+            bottom: 0;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a.active::before {
+            opacity: 1;
+            bottom: 0;
+        }
+
+        .blog-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        .blog-link:hover {
+            color: var(--accent);
+            background-color: rgba(255, 193, 7, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .blog-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .blog-link:hover svg {
+            transform: rotate(45deg);
+        }
+
+        /* Article Section */
+        .article {
+            padding: var(--section-spacing) 0;
+            position: relative;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: right;
+        }
+
+        .article-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .article-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            bottom: 5px;
+            right: 0;
+            background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+            z-index: -1;
+            opacity: 0.3;
+            border-radius: 4px;
+        }
+
+        .article-meta {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 400px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            position: relative;
+            border-radius: var(--border-radius);
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .article-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .article-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+        }
+
+        .article-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Added for article sections */
+        .article-section {
+            margin-bottom: 3rem;
+        }
+
+        .article-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .article-section h2::after {
+            content: '';
+            position: absolute;
+            width: 30%;
+            height: 4px;
+            bottom: -8px;
+            right: 0;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .checklist {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-right: 4px solid var(--accent);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .checklist-icon {
+            color: var(--accent);
+            margin-left: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .quote-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            border-right: 4px solid var(--accent);
+        }
+
+        .quote-box::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 6rem;
+            color: var(--accent);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-style: italic;
+            font-size: 1.3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            font-weight: bold;
+            text-align: left;
+            margin-top: 1rem;
+            color: var(--accent);
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toc-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .toc-link {
+            display: flex;
+            align-items: center;
+        }
+
+        .toc-link:hover {
+            color: var(--accent);
+        }
+
+        .toc-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--accent);
+            border-radius: 50%;
+            margin-left: 0.8rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* CTA section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 4rem 0 2rem;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        .cta-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .cta-text {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 193, 7, 0.2);
+        }
+
+        /* Footer with Social Links */
+        footer {
+            padding: 5rem 0 3rem;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background-color: rgba(255, 193, 7, 0.1);
+            transform: translateY(-5px);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent);
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .article-content {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            :root {
+                --section-spacing: 6rem;
+            }
+
+            .article-title {
+                font-size: 2.5rem;
+            }
+
+            .article-image {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .article-title {
+                font-size: 2.2rem;
+            }
+
+            .article-image {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 5rem;
+                --border-radius: 12px;
+            }
+
+            body {
+                font-size: 16px;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-image {
+                height: 200px;
+            }
+
+            .article-text {
+                font-size: 1.1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background-color: var(--secondary-bg);
+                position: fixed;
+                top: 0;
+                right: 0;
+                padding: 6rem 2rem 2rem;
+                width: 80%;
+                height: 100vh;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+            }
+
+            .nav-links a {
+                padding: 1rem 0;
+                font-size: 1.2rem;
+            }
+
+            .nav-open {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --section-spacing: 4rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .article-title {
+                font-size: 1.8rem;
+            }
+
+            .article-image {
+                height: 150px;
+            }
+
+            .article-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">الرئيسية</a>
+                <a href="works.html">الأعمال</a>
+                <a href="about_me.html">من أنا؟</a>
+                <a href="cs.html">دراسات الحالة</a>
+                <a href="hireMe.html">وظفني</a>
+            </nav>
+
+            <a href="blog.html" class="blog-link">
+                <span>المدونة</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L14.13 5.1l3.75 3.75 2.83-1.81zM3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="article">
+        <div class="container article-content">
+            <h1 class="article-title">كيف تبدأ مشروعك الخاص في مجال التصميم: دليل شامل للمصممين الطموحين</h1>
+            <p class="article-meta">نُشر في 10 مارس 2025 بواسطة أحمد عمر</p>
+            <div class="article-image">
+                <img src="https://kontra.agency/wp-content/uploads/2019/07/Graphic-Design-types-1280x800.jpg" alt="مشروع تصميم" />
+            </div>
+
+            <div class="toc">
+                <h3 class="toc-title">محتويات المقال</h3>
+                <ul class="toc-list">
+                    <li class="toc-item">
+                        <a href="#intro" class="toc-link">
+                            <span class="toc-number">1</span>
+                            <span>مقدمة: لماذا تحتاج إلى مشروعك الخاص؟</span>
+                        </a>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#foundation" class="toc-link">
+                            <span class="toc-number">2</span>
+                            <span>أساسيات بناء مشروع تصميم ناجح</span>
+                        </a>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#skills" class="toc-link">
+                            <span class="toc-number">3</span>
+                            <span>المهارات الأساسية التي يحتاجها كل مصمم مستقل</span>
+                        </a>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#brand" class="toc-link">
+                            <span class="toc-number">4</span>
+                            <span>بناء هويتك الخاصة كمصمم</span>
+                        </a>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#clients" class="toc-link">
+                            <span class="toc-number">5</span>
+                            <span>استراتيجيات جذب العملاء المثاليين</span>
+                        </a>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#growth" class="toc-link">
+                            <span class="toc-number">6</span>
+                            <span>خطة النمو: من مصمم مستقل إلى استوديو تصميم</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="article-text">
+                <div id="intro" class="article-section">
+                    <h2>مقدمة: لماذا تحتاج إلى مشروعك الخاص؟</h2>
+                    <p>في عصر الاقتصاد الرقمي، أصبح التصميم صناعة مزدهرة تتجاوز قيمتها مليارات الدولارات. لكن الفرق بين المصمم الناجح والمصمم العادي ليس فقط في المهارات التقنية، بل في القدرة على تحويل تلك المهارات إلى مشروع مستدام. إن بدء مشروعك الخاص في مجال التصميم ليس مجرد خيار للاستقلال المالي، بل هو فرصة لصياغة مسارك المهني بشروطك الخاصة.</p>
+
+                    <div class="quote-box">
+                        <p class="quote-text">التصميم ليس فقط كيف يبدو الشيء أو يشعر به، التصميم هو كيف يعمل.</p>
+                        <p class="quote-author">ستيف جوبز</p>
+                    </div>
+
+                    <p>الإحصائيات تتحدث بوضوح: أكثر من 70% من المصممين المستقلين يحققون دخلاً أعلى من نظرائهم الموظفين بعد عامين من بدء مشاريعهم الخاصة. لكن الطريق ليس مفروشاً بالورود، فحوالي 60% من المشاريع الإبداعية الجديدة تفشل في أول 18 شهراً. السؤال المهم: ما الذي يميز الـ 40% الناجحين؟</p>
+                </div>
+
+                <div id="foundation" class="article-section">
+                    <h2>أساسيات بناء مشروع تصميم ناجح</h2>
+                    <p>قبل أن تترك وظيفتك وتغامر في عالم ريادة الأعمال، هناك بعض الأساسيات التي يجب أن تضعها في اعتبارك:</p>
+
+                    <div class="checklist">
+                        <div class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <div>
+                                <strong>حدد تخصصك بعناية:</strong> لا تحاول أن تكون كل شيء لكل شخص. المصممون الذين يركزون على مجال معين (تجربة المستخدم، واجهات المستخدم، التصميم الجرافيكي، تصميم الهوية، إلخ) يبنون سمعة أقوى ويجذبون عملاء مستهدفين بشكل أفضل.
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <div>
+                                <strong>فهم قيمتك السوقية:</strong> لا تحدد أسعارك بناءً على ما يفعله الآخرون فقط. افهم القيمة الحقيقية التي تقدمها للعملاء وسعّر خدماتك وفقاً لذلك. التسعير المنخفض قد يجلب عملاء أكثر، لكنه غالباً ما يؤدي إلى مشاريع أقل قيمة ومردود أقل.
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <div>
+                                <strong>استثمر في محفظة أعمال استثنائية:</strong> محفظة أعمالك هي واجهتك للعالم. لا تقم بملئها بكل مشروع قمت به، بل اختر أفضل الأعمال التي تعكس رؤيتك ومستوى جودتك وتناسب نوع العملاء الذين ترغب في جذبهم.
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <div>
+                                <strong>بناء شبكة علاقات قوية:</strong> أكثر من 65% من الأعمال في مجال التصميم تأتي من الإحالات والتوصيات. استثمر وقتك في بناء علاقات حقيقية مع الزملاء والعملاء، وشارك في مجتمعات التصميم المحلية والعالمية.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="skills" class="article-section">
+                    <h2>المهارات الأساسية التي يحتاجها كل مصمم مستقل</h2>
+                    <p>نعم، أنت مصمم موهوب، لكن هل تمتلك المهارات الأخرى التي تحتاجها لإدارة مشروع ناجح؟ في استطلاع أجريته مع أكثر من 200 مصمم مستقل ناجح، اتضح أن المهارات التقنية تشكل فقط 40% من أسباب نجاحهم. أما الـ 60% المتبقية فتتوزع بين:</p>
+
+                    <p><strong>1. مهارات إدارة المشاريع:</strong> القدرة على تنظيم العمل، تقدير الوقت بدقة، والالتزام بالمواعيد النهائية هي صفات أساسية للمصمم المستقل. استخدم أدوات مثل Trello أو Asana لتتبع المشاريع، وخصص وقتاً أسبوعياً للتخطيط.</p>
+
+                    <p><strong>2. مهارات التفاوض والتواصل:</strong> تعلم كيفية شرح قراراتك التصميمية بوضوح، والتفاوض على الشروط والأسعار بثقة. المصممون الذين يتواصلون بفعالية يحصلون على زيادة في المدفوعات تصل إلى 35% مقارنة بنظرائهم.</p>
+
+                    <p><strong>3. أساسيات التسويق الذاتي:</strong> قد تكون أفضل مصمم في العالم، لكن إذا لم يعرف أحد عنك، فلن يأتيك العمل. تعلم كيفية كتابة محتوى جذاب لموقعك، واستخدام منصات التواصل الاجتماعي بفعالية، وبناء حضور رقمي قوي.</p>
+
+                    <p><strong>4. معرفة أساسيات الأعمال والمحاسبة:</strong> افهم كيف تعمل العقود، وكيف تتعامل مع الضرائب، وكيف تدير تدفقاتك النقدية. الاستثمار في برنامج محاسبة بسيط مثل Freshbooks أو Wave يمكن أن يوفر عليك الكثير من الوقت والصداع.</p>
+                </div>
+
+                <div id="brand" class="article-section">
+                    <h2>بناء هويتك الخاصة كمصمم</h2>
+                    <p>المصممون يدركون قيمة الهوية البصرية للعلامات التجارية، لكن كثيراً ما يغفلون عن أهمية هويتهم الشخصية. في سوق مزدحم بالمواهب، تحتاج إلى التميز عن البقية.</p>
+
+                    <p>هناك ثلاثة عناصر أساسية لبناء هوية مميزة كمصمم مستقل:</p>
+
+                    <p><strong>1. القصة الشخصية الأصيلة:</strong> ما الذي جذبك إلى عالم التصميم؟ ما هي القيم التي توجه عملك؟ ما هي رؤيتك الفريدة؟ قصتك هي ما يجعل الناس يتذكرونك ويتواصلون معك على المستوى الإنساني.</p>
+
+                    <p><strong>2. الأسلوب التصميمي المتميز:</strong> طور أسلوباً يمكن التعرف عليه، ليس بالضرورة أن تكون محصوراً في نمط معين، لكن يجب أن يكون هناك خيط مشترك أو مقاربة مميزة تجعل أعمالك تبرز وسط الضجيج.</p>
+
+                    <p><strong>3. تجربة عميل استثنائية:</strong> جزء كبير من هويتك كمصمم هو كيفية تعاملك مع العملاء. الاحترافية، والشفافية، والاستجابة السريعة، والاهتمام بالتفاصيل - كلها عوامل تجعل العملاء يتحدثون عنك بإيجابية ويعودون إليك مراراً.</p>
+
+                    <div class="quote-box">
+                        <p class="quote-text">تميزك لا يأتي من تقليد الآخرين. يأتي من الشجاعة للتعبير عن صوتك الحقيقي والثقة في قدرتك على إضافة قيمة فريدة.</p>
+                        <p class="quote-author">محمد خضر، مؤسس مشارك في مجموعه 249Writers</p>
+                    </div>
+                </div>
+
+                <div id="clients" class="article-section">
+                    <h2>استراتيجيات جذب العملاء المثاليين</h2>
+                    <p>جذب العملاء هو التحدي الأكبر الذي يواجه المصممين المستقلين الجدد. لكن المفتاح ليس في جذب أكبر عدد من العملاء، بل في جذب العملاء المناسبين - أولئك الذين يقدرون عملك ويدفعون ما تستحق.</p>
+
+                    <p>إليك بعض الاستراتيجيات الفعالة التي أثبتت جدواها:</p>
+
+                    <div class="checklist">
+                        <div class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <div>
+                                <strong>حدد جمهورك المستهدف بدقة:</strong> لا تحاول استهداف الجميع. حدد القطاعات أو الشركات التي تستمتع بالعمل معها، وركز جهودك التسويقية عليها. على سبيل المثال، إذا كنت تفضل تصميم هويات للشركات الناشئة في مجال التكنولوجيا، ابحث عن منصات ومجتمعات تجمع هذه الشركات.
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <div>
+                                <strong>شارك المعرفة والخبرة:</strong> أنشئ مدونة، دوّن في منصات مثل Medium، شارك في بودكاست، قدم ورش عمل. المحتوى القيم يبني سلطتك في المجال ويجذب العملاء إليك دون الحاجة للبحث عنهم.
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <div>
+                                <strong>استثمر في تحسين محركات البحث (SEO):</strong> تعلم أساسيات تحسين موقعك للظهور في نتائج البحث. العملاء الذين يبحثون عن مصمم بشكل نشط هم أكثر استعداداً للتعاقد والدفع.
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="checklist-icon">✓</span>
+                            <div>
+                                <strong>استخدم دراسات الحالة بفعالية:</strong> لا تعرض فقط الصور النهائية لأعمالك، بل اشرح التحديات، والعملية، والنتائج. دراسات الحالة المفصلة تظهر طريقة تفكيرك وتميزك عن المصممين الآخرين.
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>استراتيجية ذكية ولكن مغفلة هي "التسويق العكسي" - بدلاً من البحث المستمر عن عملاء جدد، اجعل العملاء المحتملين يأتون إليك من خلال بناء سلطة وتأثير في مجال معين. مصمم قابلته يركز فقط على تصميم مواقع لأصحاب العيادات الطبية، وقد أصبح المرجع الأول في هذا المجال، مما جعل العملاء ينتظرون دورهم للعمل معه.</p>
+                </div>
+
+                <div id="growth" class="article-section">
+                    <h2>خطة النمو: من مصمم مستقل إلى استوديو تصميم</h2>
+                    <p>بعد أن تستقر كمصمم مستقل، قد تفكر في التوسع وبناء استوديو خاص. هذه خطوة كبيرة تتطلب تخطيطاً دقيقاً. إليك مسار النمو المنطقي الذي يمكن أن تتبعه:</p>
+
+                    <p><strong>المرحلة الأولى: المصمم المستقل الناجح</strong><br>
+                    ركز على بناء محفظة أعمال قوية، وتطوير عملاء دائمين، وإنشاء نظام عمل مستقر. تأكد من أن لديك تدفقًا ثابتًا من المشاريع واحتياطي مالي يكفي لثلاثة أشهر على الأقل.</p>
+
+                    <p><strong>المرحلة الثانية: التعاون مع مستقلين آخرين</strong><br>
+                    عندما تبدأ بالحصول على مشاريع أكبر، تعاون مع مصممين ومطورين مستقلين آخرين. هذا يسمح لك بقبول مشاريع أكبر دون الالتزام المالي الكبير الذي يأتي مع توظيف فريق دائم.</p>
+
+                    <p><strong>المرحلة الثالثة: توظيف الموظف الأول</strong><br>
+                    غالبًا ما يكون أول موظف مساعدًا إداريًا أو مديرًا للمشاريع، وليس مصممًا. هذا يحررك من المهام الإدارية ويتيح لك التركيز على النمو الاستراتيجي والإبداع.</p>
+
+                    <p><strong>المرحلة الرابعة: بناء فريق أساسي</strong><br>
+                    مع زيادة حجم المشاريع وضمان استقرار التدفق النقدي، حان الوقت لتوظيف فريق أساسي. ابدأ بالمهارات التي تكمل مهاراتك، واستمر في الاعتماد على المستقلين للمهام المتخصصة.</p>
+
+                    <div class="quote-box">
+                        <p class="quote-text">أكبر خطأ يرتكبه المصممون عند التوسع هو التوظيف بسرعة كبيرة. النمو البطيء والمدروس يبني أساسًا أقوى على المدى الطويل.</p>
+                        <p class="quote-author">ابراهيم عبد الباسط، إتقان</p>
+                    </div>
+
+                    <p><strong>المرحلة الخامسة: إنشاء العلامة التجارية للاستوديو</strong><br>
+                    حان الوقت للانتقال من العلامة التجارية الشخصية إلى علامة الاستوديو. هذا يتطلب إعادة تفكير في الهوية البصرية، الموقع الإلكتروني، استراتيجية التسويق، وإطار عمل موحد للمشاريع.</p>
+
+                    <p>تذكر دائمًا: النمو ليس هدفًا بحد ذاته. بعض المصممين المستقلين يحققون نجاحًا ماليًا ومهنيًا أكبر من أصحاب الاستوديوهات. الأهم هو بناء نموذج عمل يتناسب مع أهدافك الشخصية ونمط الحياة الذي تسعى إليه.</p>
+                </div>
+
+              
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/ahmedx7w" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577 0-.285-.011-1.038-.017-2.038-3.338.724-4.042-1.611-4.042-1.611-.546-1.385-1.332-1.754-1.332-1.754-1.087-.744.082-.729.082-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.762-1.604-2.665-.305-5.467-1.332-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.123-.305-.535-1.528.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02-.005 2.042.138 3.001.405 2.291-1.552 3.297-1.23 3.297-1.23.654 1.648.243 2.871.12 3.176.771.84 1.235 1.91 1.235 3.221 0 4.61-2.807 5.625-5.479 5.921.43.372.814 1.104.814 2.222 0 1.604-.015 2.896-.015 3.287 0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12 24 5.37 18.63 0 12 0z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/ahmedx7w" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5v-9h3v9zm-1.5-10.5c-.966 0-1.5-.534-1.5-1.5 0-.966.534-1.5 1.5-1.5s1.5.534 1.5 1.5c0 .966-.534 1.5-1.5 1.5zM19 19h-3v-4.5c0-1.5-.5-2.5-1.5-2.5-1 0-1.5.5-1.5 2.5V19h-3v-9h3v1.5c.5-.5 1-1 2-1 2 0 3 1.5 3 3.5V19z"/>
+                    </svg>
+                </a>
+                <a href="https://www.behance.net/ahmedx7w" class="social-link" target="_blank" rel="noopener noreferrer">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22.136 9.526h-6.223c.167-1.385 1.187-2.111 2.625-2.111 1.06 0 1.885.32 2.58.976l.918-1.43c-.903-.804-2.122-1.246-3.531-1.246-2.881 0-4.761 1.889-4.761 4.845s1.88 4.834 4.593 4.834c2.771 0 4.548-1.815 4.548-4.402 0-.273-.024-.531-.067-.787zm-6.083 2.264c.085-.889.725-1.398 1.696-1.398 1.015 0 1.62.509 1.665 1.398h-3.361zM9.634 10.454c.706-.375 1.166-1.093 1.166-2.001 0-1.798-1.33-2.708-3.508-2.708H0v10.511h7.733c2.299 0 3.641-1.177 3.641-3.098 0-1.243-.637-2.103-1.74-2.704zm-6.492-2.486h2.642c.964 0 1.518.426 1.518 1.188 0 .796-.566 1.222-1.595 1.222H3.142v-2.41zm2.779 6.594H3.142v-2.618h2.735c1.12 0 1.694.45 1.694 1.31 0 .91-.596 1.308-1.65 1.308zM15.446 6.313h5.016v1.326h-5.016z"/>
+                  </svg>
+                  </a>
+
+                </a>
+            </div>
+            <p class="footer-text">جميع الحقوق محفوظة لـ أحمد عمر © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('nav-open');
+        }
+    </script>
+</body>
+</html>

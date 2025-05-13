@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دراسة حالة: هوية بصرية لعلامة تجميلية | أحمد عمر</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- Base Styles and Variables (Copied from reqcs.html) --- */
+        :root {
+            --main-bg: #121212;
+            --secondary-bg: #1e1e1e;
+            --accent: #FFC107;
+            --accent-dark: #FFA000;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 16px;
+            --card-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            --card-shadow-hover: 0 16px 32px rgba(0,0,0,0.3);
+            --section-spacing: 7rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 18px;
+            direction: rtl;
+            scroll-behavior: smooth;
+            background: var(--main-bg) radial-gradient(circle at 10% 90%, rgba(255,193,7,0.05) 0%, rgba(18,18,18,0) 30%);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        a { color: var(--text-color); text-decoration: none; transition: var(--transition); }
+
+        /* --- Header (Copied from reqcs.html) --- */
+        header {
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; color: var(--text-color); cursor: pointer; transition: var(--transition); z-index: 101; }
+        .menu-toggle:hover { color: var(--accent); transform: rotate(90deg); }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-weight: 600; position: relative; font-size: 1.1rem; padding: 0.5rem 0; letter-spacing: 0.5px; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            bottom: -4px;
+            right: 50%;
+            transform: translateX(50%) rotate(45deg);
+            background-color: var(--accent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .nav-links a:hover::before { opacity: 1; bottom: 0; }
+        .nav-links a.active { color: var(--accent); }
+        .nav-links a.active::before { opacity: 1; bottom: 0; }
+        .blog-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+        .blog-link:hover { color: var(--accent); background-color: rgba(255, 193, 7, 0.2); transform: translateY(-2px); }
+        .blog-link svg { transition: transform 0.3s ease; }
+        .blog-link:hover svg { transform: rotate(45deg); }
+
+        /* --- Button Styles (Copied from reqcs.html) --- */
+        .btn {
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--main-bg);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+        }
+        .btn-primary:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 193, 7, 0.4);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        .btn-outline:hover {
+            background-color: rgba(255, 193, 7, 0.1);
+            transform: translateY(-5px);
+        }
+        .btn svg { transition: var(--transition); }
+        .btn:hover svg { transform: translateX(5px); }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            padding: calc(var(--section-spacing) * 0.8) 0;
+            position: relative;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .hero-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        .hero-image:hover {
+            transform: scale(1.03);
+            box-shadow: var(--card-shadow-hover);
+        }
+        .hero-content {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.2s;
+        }
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .hero-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-meta span { font-weight: 600; }
+        .hero-meta span::before {
+            content: '•';
+            margin-left: 0.5rem;
+            color: var(--accent);
+        }
+        .hero-text { color: var(--text-secondary); font-size: 1.1rem; }
+
+        /* --- Branding Showcase Section --- */
+        .branding-section {
+            padding: var(--section-spacing) 0;
+            background-color: var(--secondary-bg);
+        }
+        .branding-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+        .branding-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .logo-container {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.4s;
+        }
+        .logo-image {
+            width: 80%;
+            max-width: 300px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        .logo-image:hover { transform: scale(1.05); }
+        .color-swatches {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        .swatch {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        .swatch:hover {
+            transform: scale(1.1);
+            box-shadow: var(--card-shadow-hover);
+        }
+        .swatch span {
+            position: absolute;
+            bottom: -2rem;
+            right: 50%;
+            transform: translateX(50%);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* --- Process Section --- */
+        .process-section {
+            padding: var(--section-spacing) 0;
+        }
+        .process-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+        .process-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+        .process-item:nth-child(1) { animation-delay: 0.4s; }
+        .process-item:nth-child(2) { animation-delay: 0.5s; }
+        .process-item:nth-child(3) { animation-delay: 0.6s; }
+        .process-item:nth-child(even) { direction: ltr; }
+        .process-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        .process-image:hover {
+            transform: scale(1.03);
+            box-shadow: var(--card-shadow-hover);
+        }
+        .process-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        .process-content p { color: var(--text-secondary); }
+
+        /* --- Testimonial Section --- */
+        .testimonial-section {
+            padding: var(--section-spacing) 0;
+            background: linear-gradient(to bottom, var(--secondary-bg), var(--main-bg));
+        }
+        .testimonial-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+        .testimonial-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--main-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 0.4s;
+        }
+        .testimonial-card p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .testimonial-card h4 {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-section {
+            padding: var(--section-spacing) 0;
+        }
+        .gallery-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .gallery-item {
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+        .gallery-item:nth-child(1) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.7s; }
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow-hover);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .gallery-item:hover img { transform: scale(1.08); }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            padding: calc(var(--section-spacing) * 0.8) 0;
+            text-align: center;
+        }
+        .cta-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        .cta-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Footer (Copied from reqcs.html) --- */
+        footer {
+            padding: 5rem 0 3rem;
+            background-color: var(--secondary-bg);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin-top: var(--section-spacing);
+        }
+        .footer-text { font-size: 1rem; color: var(--text-secondary); }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 1200px) {
+            .hero-grid, .branding-grid { grid-template-columns: 1fr; }
+            .hero-image, .logo-container { margin-bottom: 2rem; }
+        }
+        @media (max-width: 992px) {
+            .hero-title { font-size: 2.6rem; }
+            .process-item { grid-template-columns: 1fr; }
+            .process-image { margin-bottom: 1.5rem; }
+            .gallery-item img { height: 180px; }
+        }
+        @media (max-width: 768px) {
+            :root { --section-spacing: 5rem; --border-radius: 12px; }
+            body { font-size: 16px; }
+            .hero-title { font-size: 2.2rem; }
+            .hero-meta { flex-direction: column; gap: 1rem; }
+            .branding-title, .process-title, .testimonial-title, .gallery-title { font-size: 2rem; }
+            .logo-image { width: 60%; }
+            .swatch { width: 80px; height: 80px; }
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 1rem;
+                background-color: var(--secondary-bg);
+                position: fixed;
+                top: 0;
+                right: 0;
+                padding: 6rem 2rem 2rem;
+                width: 80%;
+                height: 100vh;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            }
+            .nav-links.nav-open { transform: translateX(0); display: flex; }
+            .nav-links a { padding: 1rem 0; font-size: 1.2rem; }
+        }
+        @media (max-width: 576px) {
+            :root { --section-spacing: 4rem; }
+            .container { padding: 0 1.5rem; }
+            .hero-title { font-size: 1.8rem; }
+            .hero-text, .process-content p { font-size: 1rem; }
+            .gallery-item img { height: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">الرئيسية</a>
+                <a href="works.html">الأعمال</a>
+                <a href="about_me.html">من أنا؟</a>
+                <a href="cs.html" class="active">دراسات الحالة</a>
+                <a href="hireMe.html">وظفني</a>
+            </nav>
+            <a href="blog.html" class="blog-link">
+                <span>المدونة</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0L14.13 5.1l3.75 3.75 2.83-1.81zM3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25z"/>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-grid">
+                <img src="https://i.ibb.co/jZyx1jb/Untitled-0.png" alt="هوية بصرية لعلامة تجميلية" class="hero-image" loading="lazy">
+                <div class="hero-content">
+                    <h1 class="hero-title">بناء هوية بصرية مؤثرة لعلامة تجميلية</h1>
+                    <div class="hero-meta">
+                        <span>الفئة: هوية بصرية</span>
+                        <span>المدة: 3 أشهر</span>
+                        <span>العميل: علامة تجميل ناشئة</span>
+                    </div>
+                    <p class="hero-text">تصميم هوية بصرية تعكس الأناقة والحداثة لعلامة تجارية في قطاع التجميل، مع التركيز على الشعار، الألوان، والتطبيقات البصرية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="branding-section">
+        <div class="container">
+            <h2 class="branding-title">عرض الهوية البصرية</h2>
+            <div class="branding-grid">
+                <div class="logo-container">
+                    <img src="https://via.placeholder.com/300x300/1e1e1e/FFC107?text=Logo" alt="شعار العلامة" class="logo-image" loading="lazy">
+                </div>
+                <div class="color-swatches">
+                    <div class="swatch" style="background-color: #FFC107;"><span>#FFC107</span></div>
+                    <div class="swatch" style="background-color: #FF4081;"><span>#FF4081</span></div>
+                    <div class="swatch" style="background-color: #FFFFFF;"><span>#FFFFFF</span></div>
+                    <div class="swatch" style="background-color: #121212;"><span>#121212</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="container">
+            <h2 class="process-title">عملية التصميم</h2>
+            <div class="process-item">
+                <img src="https://via.placeholder.com/600x400/1e1e1e/FFC107?text=Research" alt="البحث" class="process-image" loading="lazy">
+                <div class="process-content">
+                    <h3>البحث والإستراتيجية</h3>
+                    <p>دراسة السوق والجمهور المستهدف لتحديد القيم الأساسية للعلامة ووضع إستراتيجية بصرية تعكس الأناقة.</p>
+                </div>
+            </div>
+            <div class="process-item">
+                <img src="https://via.placeholder.com/600x400/1e1e1e/FFC107?text=Sketching" alt="التصميم الأولي" class="process-image" loading="lazy">
+                <div class="process-content">
+                    <h3>التصميم الأولي</h3>
+                    <p>إنشاء رسومات تخطيطية للشعار واختيار الألوان والخطوط بناءً على الإستراتيجية المحددة.</p>
+                </div>
+            </div>
+            <div class="process-item">
+                <img src="https://via.placeholder.com/600x400/1e1e1e/FFC107?text=Finalization" alt="التنفيذ النهائي" class="process-image" loading="lazy">
+                <div class="process-content">
+                    <h3>التنفيذ والتطبيق</h3>
+                    <p>تصميم الشعار النهائي وتطبيق الهوية على مواد تسويقية مثل العبوات وبطاقات الأعمال.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 class="testimonial-title">رأي العميل</h2>
+            <div class="testimonial-card">
+                <p>"لقد كانت تجربة العمل مع أحمد استثنائية. هويته البصرية منحت علامتنا التجارية مظهراً احترافياً وأنيقاً، وزادت من ثقة عملائنا."</p>
+                <h4>سارة، مؤسسة العلامة التجارية</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="gallery-title">معرض التطبيقات البصرية</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/600x400/1e1e1e/FFC107?text=Packaging" alt="تصميم العبوات" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/600x400/1e1e1e/FFC107?text=Business+Card" alt="بطاقة الأعمال" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/600x400/1e1e1e/FFC107?text=Banner" alt="لافتة تسويقية" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/600x400/1e1e1e/FFC107?text=Social+Media" alt="تصميم وسائل التواصل" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">هل ترغب في إنشاء هوية بصرية مميزة؟</h2>
+            <p class="cta-text">تواصل معي لتصميم هوية تعكس قيم علامتك التجارية وتجذب جمهورك المستهدف.</p>
+            <a href="hireMe.html" class="btn btn-primary">ابدأ مشروعك الآن</a>
+            <a href="cs.html" class="btn btn-outline">عرض دراسات الحالة الأخرى</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">جميع الحقوق محفوظة لـ أحمد عمر © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('nav-open');
+        }
+
+        // Intersection Observer for animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.hero-content, .logo-container, .swatch, .process-item, .testimonial-card, .gallery-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.target.style.opacity === '0') {
+                        // CSS animation handles the fade-in
+                    }
+                });
+            }, { threshold: 0.1 });
+            animateElements.forEach(element => { observer.observe(element); });
+        });
+    </script>
+</body>
+</html>
